@@ -1,0 +1,80 @@
+import pandas as pd
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import tkinter as tk
+from tkinter import ttk
+import numpy as np
+
+# Load dataset
+diabetes_dataset = pd.read_csv(r"C:\Users\APOORVA N\Desktop\jupyter\diabetes.csv")
+
+# Split dataset into training and testing sets
+X = diabetes_dataset.drop(columns='Outcome', axis=1)
+Y = diabetes_dataset['Outcome']
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+
+# Train SVM model
+classifier = SVC(kernel='linear', random_state=42)
+classifier.fit(X_train, Y_train)
+
+# Evaluate model performance
+Y_pred = classifier.predict(X_test)
+accuracy = accuracy_score(Y_test, Y_pred)
+print(f"Model accuracy: {accuracy:.3f}")
+
+# Create GUI application
+root = tk.Tk()
+root.title("Diabetes Prediction Form")
+
+# Define input fields and labels
+input_fields = [
+    {"label": "Pregnancies", "type": int},
+    {"label": "Glucose", "type": int},
+    {"label": "Blood Pressure", "type": int},
+    {"label": "Skin Thickness", "type": int},
+    {"label": "Insulin", "type": int},
+    {"label": "BMI", "type": float},
+    {"label": "Diabetes Pedigree Function", "type": float},
+    {"label": "Age", "type": int}
+]
+
+entries = []
+for i, field in enumerate(input_fields):
+    label = tk.Label(root, text=field["label"])
+    label.grid(row=i, column=0, padx=5, pady=5)
+    entry = tk.Entry(root)
+    entry.grid(row=i, column=1, padx=5, pady=5)
+    entries.append(entry)
+
+# Define submit button
+def submit():
+    try:
+        # Get input values
+        input_values = []
+        for i, entry in enumerate(entries):
+            value = entry.get()
+            input_values.append(input_fields[i]["type"](value))
+
+        # Create input array
+        input_array = np.array([input_values])
+
+        # Make prediction
+        prediction = classifier.predict(input_array)[0]
+
+        # Display result
+        if prediction == 1:
+            result_text = "Diabetic"
+        else:
+            result_text = "Not Diabetic"
+        result_label = tk.Label(root, text=f"Predicted result: {result_text}")
+        result_label.grid(row=len(input_fields), column=0, columnspan=2, padx=5, pady=5)
+
+    except ValueError:
+        result_label = tk.Label(root, text="Please enter valid data")
+        result_label.grid(row=len(input_fields), column=0, columnspan=2, padx=5, pady=5)
+
+submit_button = tk.Button(root, text="Submit", command=submit)
+submit_button.grid(row=len(input_fields), column=0, columnspan=2, padx=5, pady=10)
+
+root.mainloop()
