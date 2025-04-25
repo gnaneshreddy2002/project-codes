@@ -1,0 +1,819 @@
+package learningselenium;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class filterspart {
+
+    public static void main(String[] args) {
+        // Set the path to the ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "D:\\Drivers\\ChromeDriver.exe");
+        
+        try {
+            Thread.sleep(5000); // Pause for 10 seconds
+        } catch (InterruptedException e) {
+            e.printStackTrace(); // Print the stack trace of the exception
+        }
+        
+        // Initialize ChromeDriver
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
+        
+        try {
+            Thread.sleep(5000); // Pause for 10 seconds
+        } catch (InterruptedException e) {
+            e.printStackTrace(); // Print the stack trace of the exception
+        }
+      
+            // Navigate to the website
+            driver.get("https://www.bewakoof.com");
+
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            // Handle the notification (if it appears)
+          
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("wzrk-confirm")));
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", notification);
+                notification.click();
+          
+
+                try {
+                    Thread.sleep(5000); // Pause for 10 seconds
+                } catch (InterruptedException e) {
+                    e.printStackTrace(); // Print the stack trace of the exception
+                }
+                
+                
+                WebElement loginLink = driver.findElement(By.xpath("//*[@id=\"loginLink\"]"));
+                loginLink.click();
+
+                
+                
+                try {
+                    Thread.sleep(5000); // Pause for 10 seconds
+                } catch (InterruptedException e) {
+                    e.printStackTrace(); // Print the stack trace of the exception
+                }
+                
+
+                try {
+                    WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    WebElement phoneNumberInput = wait2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"mobile_number\"]")));
+
+                    
+                    try {
+                        Thread.sleep(5000); // Pause for 10 seconds
+                    } catch (InterruptedException e) {
+                        e.printStackTrace(); // Print the stack trace of the exception
+                    }
+                    // Enter the phone number
+                    phoneNumberInput.sendKeys("8660022904"); // Replace with your desired phone number
+
+                    
+                    try {
+                        Thread.sleep(5000); // Pause for 10 seconds
+                    } catch (InterruptedException e) {
+                        e.printStackTrace(); // Print the stack trace of the exception
+                    }
+                    // Optionally, you can press Enter after entering the phone number
+                    phoneNumberInput.sendKeys(Keys.ENTER);
+                } catch (Exception e) {
+                    System.out.println("Phone number input field not found.");
+                }
+
+                try {
+                    // Introduce a delay of 10 seconds
+                    Thread.sleep(15000); // 10000 milliseconds = 10 seconds
+                    
+                    // Find the login button and click it
+                    WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div/div/div[2]/form/button"));
+                    loginButton.click();
+                } catch (InterruptedException e) {
+                    System.out.println("Thread interrupted while sleeping.");
+                } catch (Exception e) {
+                    System.out.println("Login button not found or clickable after the delay.");
+                }
+
+                
+                try {
+                   
+                	 Thread.sleep(15000); // 10000 milliseconds = 10 seconds
+
+                    // Find the login button
+                    WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div/div/div[2]/form/button")));
+
+                    // First click attempt
+                    loginButton.click();
+                    
+                    // Wait for 10 seconds
+                    Thread.sleep(10000); // Use Thread.sleep cautiously; it's generally better to use WebDriverWait
+                    
+                    // Second click attempt
+                    loginButton.click();
+
+                } catch (org.openqa.selenium.TimeoutException e) {
+                    // Handle timeout exception as needed
+                    System.out.println("Timeout occurred while waiting for element to be clickable.");
+                } catch (InterruptedException e) {
+                    // Handle interrupted exception if needed
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    // Handle any other exceptions
+                    e.printStackTrace();
+                }
+           
+                
+                try {
+                    Thread.sleep(5000); // Pause for 10 seconds
+                } catch (InterruptedException e) {
+                    e.printStackTrace(); // Print the stack trace of the exception
+                }
+                // Handle the notification (if it appears)
+                try {
+                    WebDriverWait wait3 = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    WebElement notification2 = wait3.until(ExpectedConditions.visibilityOfElementLocated(By.id("wzrk-confirm")));
+                    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", notification2);
+                    notification2.click();
+                } catch (Exception e) {
+                    // Handle exception if notification doesn't appear
+                    System.out.println("Notification 'wzrk-confirm' did not appear.");
+                }
+                
+                
+            // Scroll down the page
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0,630);");
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            
+            WebElement jeansImage = driver.findElement(By.xpath("//*[@id='pb5-3-0']/a/img"));
+            jeansImage.click();
+            
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            //aplying filters
+            
+            //size filters
+            
+            WebElement sizeopen = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[1]/div[1]/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", sizeopen);
+            sizeopen.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement sizeselect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[1]/div[2]/div/ul/li[2]/div/span/a")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", sizeselect);
+            sizeselect.click();
+           
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement sizeClose = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[1]/div[1]/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", sizeClose);
+            sizeClose.click();
+       
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            js.executeScript("window.scrollBy(0, 400);");
+            
+            //brand select
+            
+            WebElement brandopen = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[2]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", brandopen);
+            brandopen.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement brandselect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[2]/div[2]/div/ul/li[1]/div/span/a")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", brandselect);
+            brandselect.click();
+        
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement brandclose = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[2]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", brandclose);
+            brandclose.click();
+            
+            
+
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            js.executeScript("window.scrollBy(0, 600);");
+            
+            //colour select
+            
+            
+            WebElement colouropen = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[3]/div[1]/div/span")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", colouropen);
+            colouropen.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            
+            WebElement colourselect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[3]/div[2]/div/ul/div[2]/li/div/span/a")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", colourselect);
+            colourselect.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+
+            WebElement colourclose = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[3]/div[1]/div/span")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", colourclose);
+            colourclose.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            //design select
+            
+            WebElement designopen = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[4]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", designopen);
+            designopen.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            
+            WebElement designselect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[4]/div[2]/div/ul/li[1]/div/span/a")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", designselect);
+            designselect.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+
+            WebElement designclose = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[4]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", designclose);
+            designclose.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            //fit select
+            
+            WebElement fitopen = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[5]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", fitopen);
+            fitopen.click();
+            
+            
+            WebElement fitselect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[5]/div[2]/div/ul/li[2]/div/span/a")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", fitselect);
+            fitselect.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement fitclose = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[5]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", fitclose);
+            fitclose.click();
+            
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            
+            //select type
+            
+            WebElement typeopen = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[6]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", typeopen);
+            typeopen.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            
+            WebElement typeselect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[6]/div[2]/div/ul/li[1]/div/span/a")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", typeselect);
+            typeselect.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement typeclose = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[6]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", typeclose);
+            typeclose.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            //select rating
+            
+            WebElement ratingopen = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[7]/div[1]/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ratingopen);
+            ratingopen.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement ratingselect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[7]/div[2]/div/ul/li[2]/div/span/a")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ratingselect);
+            ratingselect.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement ratingclose = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[7]/div[1]/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ratingclose);
+            ratingclose.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            //select discount
+            
+            WebElement discountopen = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[8]/div[1]/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", discountopen);
+            discountopen.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement discountselect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[8]/div[2]/div/ul/li[1]/div/span/a")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", discountselect);
+            discountselect.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement discountclose = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[8]/div[1]/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", discountclose);
+            discountclose.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            
+            WebElement product1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"testProductcard_1\"]/a/div/div[1]/div[1]/img")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", product1);
+            product1.click();
+            
+
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            js.executeScript("window.scrollBy(0, 300);");
+            
+
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            
+            WebElement sizeOption30 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"testSizes_30\"]/span")));
+            sizeOption30.click();
+            
+
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            
+            WebElement pincode1 = driver.findElement(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[2]/div/div[10]/div/div/div[3]/input"));
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            pincode1.sendKeys("560063");
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            pincode1.sendKeys(Keys.RETURN); // Use Keys.ENTER to submit the search
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }	                
+          
+
+            
+            
+            WebElement addToBag1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"addButtons\"]/div/div[2]")));
+            addToBag1.click();
+            
+
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            //2nd part
+            
+            // Navigate to the website
+            driver.get("https://www.bewakoof.com");
+            
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+
+            
+            js.executeScript("window.scrollBy(0, 850);");
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement shoeImage = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"pb6-4-0\"]/a/img")));
+            shoeImage.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+
+            //applying filters
+            
+            //select category
+            
+            WebElement categoryopen = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[1]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", categoryopen);
+            categoryopen.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement categoryselect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[1]/div[2]/div/ul/li[1]/div/span/a")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", categoryselect);
+            categoryselect.click();
+           
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement categoryClose = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[1]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", categoryClose);
+            categoryClose.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            //select size
+            
+            
+            WebElement size2open = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[2]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", size2open);
+            size2open.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement size2select = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[2]/div[2]/div/ul/li[3]/div/span/a")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", size2select);
+            size2select.click();
+           
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement size2Close = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[2]/div/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", size2Close);
+            size2Close.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            //select brand
+            
+            WebElement brand2open = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[3]/div[1]/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", brand2open);
+            brand2open.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement brand2select = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[3]/div[2]/div/ul/li[2]/div/span/a")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", brand2select);
+            brand2select.click();
+        
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            WebElement brand2close = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"app\"]/div/div[2]/div[2]/div[2]/div[3]/div[1]/div/div/div[2]/div/div[3]/div[1]/div")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", brand2close);
+            brand2close.click();
+            
+            
+
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            //selecting 2nd product
+            
+            
+            WebElement product2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"testProductcard_1\"]/a/div/div[1]/div[1]/img")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", product2);
+            product2.click();
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            js.executeScript("window.scrollBy(0, 300);");
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            
+            WebElement sizeOption = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"testSizes_UK 8\"]")));
+            sizeOption.click();
+            
+            
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+            
+                       
+            
+            
+            WebElement addToBag2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"addButtons\"]/div/div[2]")));
+            addToBag2.click();
+           
+            
+            
+	        try {
+	            Thread.sleep(5000); // Pause for 10 seconds
+	        } catch (InterruptedException e) {
+	            e.printStackTrace(); // Print the stack trace of the exception
+	        }
+            
+
+	        // Navigate to the website
+            driver.get("https://www.bewakoof.com");
+
+            
+            try {
+	            Thread.sleep(5000); // Pause for 10 seconds
+	        } catch (InterruptedException e) {
+	            e.printStackTrace(); // Print the stack trace of the exception
+	        }
+            
+            WebElement searchBox = driver.findElement(By.xpath("//input[@placeholder='Search by product, category or collection']"));
+            searchBox.sendKeys("Men's Black Deadpool Graphic Printed Oversized T-shirt");
+            searchBox.sendKeys(Keys.RETURN); // Use Keys.ENTER to submit the search
+         // Wait for the product to appear
+            
+            try {
+	            Thread.sleep(5000); // Pause for 10 seconds
+	        } catch (InterruptedException e) {
+	            e.printStackTrace(); // Print the stack trace of the exception
+	        }
+            
+            
+            WebElement product3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"testProductcard_1\"]/a/div/div[1]/div[1]/img")));
+            product3.click();
+            
+           
+            try {
+	            Thread.sleep(5000); // Pause for 10 seconds
+	        } catch (InterruptedException e) {
+	            e.printStackTrace(); // Print the stack trace of the exception
+	        }
+
+            // Scroll down to ensure size dropdown is visible
+            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 300);");
+            
+            try {
+	            Thread.sleep(5000); // Pause for 10 seconds
+	        } catch (InterruptedException e) {
+	            e.printStackTrace(); // Print the stack trace of the exception
+	        }
+
+            // Wait for size dropdown and select size 'M'
+            WebElement sizeDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"testSizes_M\"]/span")));
+            sizeDropdown.click();
+            
+            try {
+	            Thread.sleep(5000); // Pause for 10 seconds
+	        } catch (InterruptedException e) {
+	            e.printStackTrace(); // Print the stack trace of the exception
+	        }
+            
+            WebElement sizeOptionM = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"testSizes_M\"]/span")));
+            sizeOptionM.click();
+            
+           
+            try {
+                Thread.sleep(5000); // Pause for 10 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // Print the stack trace of the exception
+            }
+            
+         
+            
+            
+            WebElement addToBagButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"addButtons\"]/div/div[2]")));
+            addToBagButton.click();
+            
+            try {
+	            Thread.sleep(5000); // Pause for 10 seconds
+	        } catch (InterruptedException e) {
+	            e.printStackTrace(); // Print the stack trace of the exception
+	        }
+            
+            //goto bag
+            
+            WebElement gotobag = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"addButtons\"]/div/div[2]")));
+            
+            gotobag.click();
+            
+            
+            try {
+	            Thread.sleep(5000); // Pause for 10 seconds
+	        } catch (InterruptedException e) {
+	            e.printStackTrace(); // Print the stack trace of the exception
+	        }
+            
+            //remove item
+            
+            
+            WebElement removeitem = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"testRemoveCart\"]")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", removeitem);
+            removeitem.click();
+            
+            try {
+	            Thread.sleep(5000); // Pause for 10 seconds
+	        } catch (InterruptedException e) {
+	            e.printStackTrace(); // Print the stack trace of the exception
+	        }
+     
+            //wishlist
+            
+            WebElement wishlist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"testSavefrLater\"]")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", wishlist);
+            wishlist.click();
+     
+            
+            
+            try {
+	            Thread.sleep(5000); // Pause for 10 seconds
+	        } catch (InterruptedException e) {
+	            e.printStackTrace(); // Print the stack trace of the exception
+	        }
+            
+            //checkout
+        	// Wait for the element to be clickable
+    		WebElement checkout = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"os_payNow_btn\"]")));
+
+    		// Scroll into view
+    		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkout);
+
+    		// Optionally, use JavaScript to click the button if normal click doesn't work
+    		((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkout);
+
+   
+
+            
+    }
+}
